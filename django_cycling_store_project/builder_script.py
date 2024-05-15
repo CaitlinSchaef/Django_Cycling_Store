@@ -40,13 +40,13 @@ from django_cycling_store_app.models import *
 # for customer in customers:
 #     print(customer)
 
-object_list = CustomerOrder.objects.bulk_create(
-    [
-        CustomerOrder(date_month=4, date_day=20, date_year=2023,),
-        CustomerOrder(date_month=7, date_day=22, date_year=2024,),
-    ]
-)
+# object_list = CustomerOrder.objects.bulk_create(
+#     [
+#         CustomerOrder(date_month=4, date_day=20, date_year=2023,),
+#         CustomerOrder(date_month=7, date_day=22, date_year=2024,),
+#     ]
+# )
 
-customer_orders = CustomerOrder.objects.all()
-for customer_order in customer_orders:
-    print(customer_order)
+# customer_orders = CustomerOrder.objects.all()
+# for customer_order in customer_orders:
+#     print(customer_order)
