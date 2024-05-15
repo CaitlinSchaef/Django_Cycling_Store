@@ -18,7 +18,7 @@ import builder_script
 
 # Do all of these functions then need a class? Like a CreatedOrder Class that produces order objects?
 # def order_create_function():
-#     //
+#     // need to delete the vehicle from stock
 #     print()
 
 # def order_view_function():
@@ -29,6 +29,6 @@ import builder_script
 #     //
 #     print()
 
-# def order_create_function():
+# def order_delete_function():
 #     //
 #     print()

@@ -6,9 +6,9 @@ from django.db import models
 # python manage.py migrate
 
 class Vehicle(models.Model):
-    type = ('unicyle', 'bicycle', 'tricycle'),
+    type = models.TextField(max_length=50, default='bicycle')
     number_in_stock = models.PositiveIntegerField(0)
-    price = models.PositiveIntegerField(3500)
+    price = models.PositiveIntegerField(default=3500)
 
     def __str__(self):
         return f'Type: {self.type}, Price: ${self.number_in_stock} Number In Stock: {self.number_in_stock}'
@@ -26,8 +26,8 @@ class CustomerOrder(models.Model):
     customer_name = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     order = Vehicle()
     created_date = '{date_month}-{date_day}-{date_year}'
-    paid = models.TextField(null=True)
+    paid = models.TextField(null=True, default='not paid')
 
     def __str__(self):
-        return f'ORDER: Customer Name:{self.name}, Customer Order: {self.order}, Order Date: {self.created_date}, Paid: {self.paid} '
+        return f'ORDER: Customer Name:{self.customer_name}, Customer Order: {self.order}, Order Date: {self.created_date}, Paid: {self.paid} '
 
