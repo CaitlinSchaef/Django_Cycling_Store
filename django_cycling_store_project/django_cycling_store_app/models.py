@@ -25,10 +25,10 @@ class CustomerOrder(models.Model):
     date_day = models.PositiveIntegerField(default=12)
     date_year = models.PositiveIntegerField(default=2024)
     customer_name = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    order = models.ManyToManyField(Vehicle)
-    # created_date = '{date_month}-{date_day}-{date_year}'
+    vehicles_in_order = models.ManyToManyField(Vehicle) #type, price, color
+    #order_quantity = number
     paid = models.TextField(null=True, default='not paid')
 
     def __str__(self):
-        return f'ORDER:{self.id} {self.customer_name}, Customer Order: {self.order}, Order Date:{self.date_month}-{self.date_day}-{self.date_year}, Paid: {self.paid} '
+        return f'ORDER:{self.id} {self.customer_name}, Customer Order: {self.vehicles_in_order}, Order Date:{self.date_month}-{self.date_day}-{self.date_year}, Paid: {self.paid} '
 

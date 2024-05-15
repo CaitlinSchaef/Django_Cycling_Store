@@ -40,9 +40,10 @@ from django_cycling_store_app.models import *
 # for customer in customers:
 #     print(customer)
 
+# vehicle = Vehicle.objects.get(type='big wheel')
 # object_list = CustomerOrder.objects.bulk_create(
 #     [
-#         CustomerOrder(date_month=4, date_day=20, date_year=2023,),
+#         CustomerOrder(date_month=4, date_day=20, date_year=2023, vehicle=vehicle),
 #         CustomerOrder(date_month=7, date_day=22, date_year=2024,),
 #     ]
 # )
@@ -61,3 +62,20 @@ from django_cycling_store_app.models import *
 # customer_orders = CustomerOrder.objects.all()
 # for i in customer_orders:
 #     print(i)
+
+unicycle = Vehicle.objects.filter(type='unicycle')
+bicycle = Vehicle.objects.filter(type='bicycle')
+tricycle = Vehicle.objects.filter(type='tricycle')
+
+customer_orders = CustomerOrder.objects.all()
+
+unicycle.customer_order_set.add(customer_orders[0])
+bicycle.customer_order_set.add(customer_orders[1])
+tricycle.customer_order_set.add(customer_orders[2])
+unicycle.customer_order_set.add(customer_orders[3])
+customer_orders.save()
+
+# do something like this for when you're making an order
+# list = [unicycle, bicycle]
+# order = CustomerOrder(date=1, vehicles=list)
+# order.save()
