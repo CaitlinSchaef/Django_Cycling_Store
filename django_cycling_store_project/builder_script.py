@@ -50,3 +50,14 @@ from django_cycling_store_app.models import *
 # customer_orders = CustomerOrder.objects.all()
 # for customer_order in customer_orders:
 #     print(customer_order)
+
+# customer_order = CustomerOrder.objects.last()
+
+# customer_order.customer_name = Customer.objects.get(name='Marcus Schaeffer')
+
+# customer_order.save()
+
+
+# customer_orders = CustomerOrder.objects.all()
+# for i in customer_orders:
+#     print(i)

@@ -30,5 +30,5 @@ class CustomerOrder(models.Model):
     paid = models.TextField(null=True, default='not paid')
 
     def __str__(self):
-        return f'ORDER: Customer Name:{self.customer_name}, Customer Order: {self.order}, Order Date:{self.date_month}-{self.date_day}-{self.date_year}, Paid: {self.paid} '
+        return f'ORDER:{self.id} {self.customer_name}, Customer Order: {self.order}, Order Date:{self.date_month}-{self.date_day}-{self.date_year}, Paid: {self.paid} '
 
