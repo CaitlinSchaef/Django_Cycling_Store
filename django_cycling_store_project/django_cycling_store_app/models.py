@@ -1,17 +1,6 @@
 from django.db import models
 
-# Create your models here.
-
-# Vehicle 
-# ○ type: unicycle, bicycle, tricycle 
-# ○ number_in_stock 
-# ● Customer 
-# ○ name 
-# ● CustomerOrder 
-# ○ customer 
-# ○ order: list of Vehicles ordered 
-# ○ created_date 
-# ○ paid: (boolean) 
+                ## Create your models here. ##
 
 # python manage.py makemigrations 
 # python manage.py migrate
