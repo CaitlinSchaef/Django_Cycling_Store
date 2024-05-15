@@ -51,9 +51,9 @@ from django_cycling_store_app.models import *
 # for customer_order in customer_orders:
 #     print(customer_order)
 
-# customer_order = CustomerOrder.objects.last()
+# customer_order = CustomerOrder.objects.get(id=2)
 
-# customer_order.customer_name = Customer.objects.get(name='Marcus Schaeffer')
+# customer_order.customer_name = Customer.objects.get(name='Millie Bobby Brown')
 
 # customer_order.save()
 
