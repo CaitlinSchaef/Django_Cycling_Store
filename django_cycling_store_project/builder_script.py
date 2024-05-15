@@ -12,4 +12,6 @@ print('SCRIPT START *************************')
 # DO NOT CHANGE CODE ABOVE THIS LINE
 # WORK BELOW
 
-# from django_intro_project_app.models import *
+from django_cycling_store_app.models import *
+#python builder_script.py  
+
