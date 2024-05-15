@@ -32,3 +32,9 @@ import builder_script
 # def order_delete_function():
 #     //
 #     print()
+
+# def display_function():
+    # order_create_function()
+    # order_view_function()
+    # order_update_function()
+    # order_delete_function()

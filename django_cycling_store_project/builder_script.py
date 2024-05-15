@@ -15,3 +15,10 @@ print('SCRIPT START *************************')
 from django_cycling_store_app.models import *
 #python builder_script.py  
 
+object_list = Vehicle.objects.bulk_create(
+    [
+        Vehicle(type='bicycle', color='green', number_in_stock=10, price=250),
+        Vehicle(type='unicycle', number_in_stock=9, price=150),
+        Vehicle(type='tricycle', color='blue', number_in_stock=20, price=300)
+    ]
+)
