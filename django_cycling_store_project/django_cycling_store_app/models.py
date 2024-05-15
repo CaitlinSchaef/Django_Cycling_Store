@@ -21,14 +21,14 @@ class Customer(models.Model):
         return f'Customer Name: {self.name}'
 
 class CustomerOrder(models.Model):
-    date_month = models.PositiveIntegerField(4)
-    date_day = models.PositiveIntegerField(12)
-    date_year = models.PositiveIntegerField(2024)
+    date_month = models.PositiveIntegerField(default=4)
+    date_day = models.PositiveIntegerField(default=12)
+    date_year = models.PositiveIntegerField(default=2024)
     customer_name = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    order = models.ForeignKey(Vehicle, on_delete=models.SET_NULL, null=True)
-    created_date = '{date_month}-{date_day}-{date_year}'
+    order = models.ManyToManyField(Vehicle)
+    # created_date = '{date_month}-{date_day}-{date_year}'
     paid = models.TextField(null=True, default='not paid')
 
     def __str__(self):
-        return f'ORDER: Customer Name:{self.customer_name}, Customer Order: {self.order}, Order Date: {self.created_date}, Paid: {self.paid} '
+        return f'ORDER: Customer Name:{self.customer_name}, Customer Order: {self.order}, Order Date:{self.date_month}-{self.date_day}-{self.date_year}, Paid: {self.paid} '
 
