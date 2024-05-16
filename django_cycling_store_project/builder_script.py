@@ -51,7 +51,7 @@ from django_cycling_store_app.models import *
 # vehicle = Vehicle.objects.get(type='big wheel')
 # object_list = CustomerOrder.objects.bulk_create(
 #     [
-#         CustomerOrder(date_month=4, date_day=20, date_year=2023),
+#         CustomerOrder(date_month=4, date_day=20, date_year=2023 vehicle=vehicle),
 #         CustomerOrder(date_month=7, date_day=22, date_year=2024,),
 #     ]
 # )
