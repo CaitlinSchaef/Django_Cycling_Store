@@ -63,17 +63,54 @@ from django_cycling_store_app.models import *
 # for i in customer_orders:
 #     print(i)
 
-unicycle = Vehicle.objects.filter(type='unicycle')
-bicycle = Vehicle.objects.filter(type='bicycle')
-tricycle = Vehicle.objects.filter(type='tricycle')
+unicycle = Vehicle.objects.filter(type='unicycle').first()
+bicycle = Vehicle.objects.filter(type='bicycle').first()
+tricycle = Vehicle.objects.filter(type='tricycle').first()
 
 customer_orders = CustomerOrder.objects.all()
 
-unicycle.customer_order_set.add(customer_orders[0])
-bicycle.customer_order_set.add(customer_orders[1])
-tricycle.customer_order_set.add(customer_orders[2])
-unicycle.customer_order_set.add(customer_orders[3])
-customer_orders.save()
+# for order in customer_orders:
+#     print(f"ORDER: {order.customer_name} is here")
+
+
+unicycle.order.add(customer_orders[0])
+# unicycle.vehicles_in_order_set.add(customer_orders[0])
+bicycle.order.add(customer_orders[1])
+tricycle.order.add(customer_orders[2])
+unicycle.order.add(customer_orders[3])
+# customer_orders.save()
+
+unicycle.save()
+tricycle.save()
+bicycle.save()
+
+# print(unicycle)
+# for order in unicycle.order.all():
+#     print("\n *****************")
+#     print(f"\n \n{order}")
+#     for v in order.vehicles_in_order.all():
+#         print(f"\n \t {v}")
+
+# for order in bicycle.order.all():
+#     print("\n *****************")
+#     print(f"\n \n{order}")
+#     for v in order.vehicles_in_order.all():
+#         print(f"\n \t {v}")
+
+# for order in tricycle.order.all():
+#     print("\n *****************")
+#     print(f"\n \n{order}")
+#     for v in order.vehicles_in_order.all():
+#         print(f"\n \t {v}")
+
+def disp_orders(vech_type):
+    for order in vech_type.order.all():
+        print("\n *****************")
+        print(f"\n \n{order}")
+    for v in order.vehicles_in_order.all():
+        print(f"\n \t {v}")
+
+disp_orders(bicycle)
 
 # do something like this for when you're making an order
 # list = [unicycle, bicycle]
