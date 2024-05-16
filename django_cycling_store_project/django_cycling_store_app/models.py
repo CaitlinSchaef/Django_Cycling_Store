@@ -30,5 +30,8 @@ class CustomerOrder(models.Model):
     paid = models.TextField(null=True, default='not paid')
 
     def __str__(self):
-        return f'ORDER:{self.id} {self.customer_name}, Order Date:{self.date_month}-{self.date_day}-{self.date_year}, Paid: {self.paid} '
+        vech_string = ""
+        for v in self.vehicles_in_order.all():
+            vech_string += f"{v}"
+        return f'ORDER:{self.id} {self.customer_name}, Order Date:{self.date_month}-{self.date_day}-{self.date_year}, Paid: {self.paid}: \n \t {vech_string} '
 

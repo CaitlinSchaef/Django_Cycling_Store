@@ -129,9 +129,20 @@ def order_create_function():
 
 
 
-# def order_view_function():
-#     //
-#     print()
+def order_view_function():
+    print('Look up order by name:')
+    order_name = input(f'Enter name on order:')
+    customer = Customer.objects.filter(name=order_name)
+    for custy in customer:
+        print(f'{custy.id} - {custy.name}')
+    chosen_custy = input(f'Select ID of Account')
+    customer = Customer.objects.get(id=chosen_custy)
+    print(customer.id, customer)
+    # pulled_order = CustomerOrder.objects.filter(customer_name=customer.id)
+    current_customer = None
+    # print(pulled_order)
+    for order in customer.customerorder_set.all():
+        print(f'ID: {order.id}, {order}')
 
 # def order_update_function():
 #     //
@@ -166,7 +177,7 @@ def customer_portal():
         order_create_function()
     elif select_question == 2:
         print('Pulling existing orders...')
-        #order_view_function()
+        order_view_function()
     elif select_question == 3:
         print('Pulling existing orders to update...')
         #order_update_function()
@@ -198,4 +209,6 @@ def display_function():
     greeting_function()
     
 
+# for custy in Customer.objects.filter(name="Molly Ringwald"):
+#     print(custy.id, custy)
 display_function()
