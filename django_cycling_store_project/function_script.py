@@ -24,11 +24,26 @@ import builder_script
 #     order_quantity = models.PositiveIntegerField(default=1)
 #     paid = models.TextField(null=True, default='not paid')
 #############################################################################################################################################################################
+def create_customer_function():
+    print('Create a new customer:')
+    new_customer_name = input(f'Enter customer name for the order now:')
+    return Customer.objects.create(name=new_customer_name)
+    
+    
+    
 #Order to create an order:
 def order_create_function():
-    ###### Asking Name for Order
-    print('What is the name for the order?')
-    name = input(f'Enter name now:')
+    ###### Calling create customer function(), because the customer has to exist to add to order :(
+    print('Are you a new customer?')
+    customer_question = input(f'Yes/No')
+    name = ''
+    if customer_question == "Yes":
+        name = create_customer_function()
+    else:
+        customer_order_name = input(f'Enter name:')
+        name = Customer.objects.filter(name=customer_order_name).first()
+        if bool(~name):
+            return order_create_function()
     ############################################################################################################
     ######## Selecting vehicle for order
     print('What would you like to order?')
@@ -52,7 +67,7 @@ def order_create_function():
     vehicle = Vehicle.objects.filter(type=vehicle_type).first()
     ###################################################################################################################
     #######Selecting number of vehicles
-    print('How many {vehicle}s would you like?')
+    print('How many {vehicle_type}s would you like?')
     quantity_question = input(f'Enter quantity to purchase:')
     if quantity_question.isnumeric():
         quantity_question = int(quantity_question)
@@ -88,17 +103,17 @@ def order_create_function():
     
     ###################################################################################################################
     ############ Checking for payment:
+
     print('How much would you like to pay today?')
     payment_input = int(input(f'Enter amount: #'))
 
+    commerce = 'not paid'
     if payment_input == vehicle.price:
         commerce = 'paid'
-    else:
-        commerce = 'not paid'
-
     
     
-    new_order = CustomerOrder.objects.create(customer_name=name, order_quantity= quantity, date_month=month, date_day=day, date_year=year, paid=commerce)
+    
+    new_order = CustomerOrder.objects.create(customer_name=name, order_quantity=quantity, date_month=month, date_day=day, date_year=year, paid=commerce)
     # we need to identify what vehicle record we are working with
     #  vehicle = Vehicle.objects.filter(type=vehicle_type).first()
     # add that vehicle record to this order - 
@@ -107,9 +122,9 @@ def order_create_function():
     # save the order again - 
     new_order.save()
     # subtract the quantity from vehicle.number_in_stock
-    Vehicle.number_in_stock - new_order.order_quantity
+    vehicle.number_in_stock - new_order.order_quantity
     # save vehicle
-    Vehicle.save()
+    vehicle.save()
     print(new_order)
 
 
@@ -148,7 +163,7 @@ def customer_portal():
     
     if select_question == 1:
         print('Creating new order...')
-        # order_create_function()
+        order_create_function()
     elif select_question == 2:
         print('Pulling existing orders...')
         #order_view_function()
