@@ -34,23 +34,27 @@ import builder_script
 #     print()
 
 # def employee_portal():
+    #print('Welcome to the Employee Portal!')
+    #print('Would you like to delete an existing order, create a new order, view an existing order, update an existing order, or order more stock?')
+    #select_question = input (f'Select 1 to delete an existing order, Select 2 to create a new order, Select 3 to view an existing order, Select 4 to update an existing order, Select 5 to order more stock.')
      
 # def customer_portal():
+    #print('Welcome to the Customer Portal!')
+    #print('Would you like to create a new order, view an existing order, or update an existing order?')
+    #select_question = input (f'Select 1 to create a new order, Select 2 to view an existing order, Select 3 to update an existing order.')
 
 
 def greeting_function():
     main_question = input (f'Are you an employee or customer? Select 1 for Customer OR Select 2 for Employee.')
-    if main_question != 1 or main_question != 2:
-       print('That is not an option!')
-       greeting_function()
-    elif main_question == "1":
+    if main_question == "1":
        print('Opening Customer Portal...')
     #    customer_portal()
     elif main_question == "2":
        print('Opening Customer Portal...')
     #    employee_portal()
     else:
-       print('WHY AM I HERE IT BROKE')
+       print('That is not an option!')
+       greeting_function()
 
     
 
