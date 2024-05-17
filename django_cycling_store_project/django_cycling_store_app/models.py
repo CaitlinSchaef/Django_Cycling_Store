@@ -33,5 +33,5 @@ class CustomerOrder(models.Model):
         vech_string = ""
         for v in self.vehicles_in_order.all():
             vech_string += f"{v}"
-        return f'ORDER:{self.id} {self.customer_name}, Order Date:{self.date_month}-{self.date_day}-{self.date_year}, Paid: {self.paid}: \n \t {vech_string} '
+        return f'ORDER:{self.id} {self.customer_name}, Vehicles In Order: {self.order_quantity}, Order Date:{self.date_month}-{self.date_day}-{self.date_year}, Paid: {self.paid}: \n \t {vech_string} '
 

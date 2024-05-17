@@ -171,7 +171,8 @@ def order_update_function():
     elif update_selection == 2:
         print(all_orders)
         order_update_by_name = input(f'Enter Customer Name associated with order: \t')
-        pulled_by_name = CustomerOrder.objects.get(customer_name=order_update_by_name)
+        pulled_by_customer_name = Customer.objects.get(name=order_update_by_name)
+        pulled_by_name = CustomerOrder.objects.get(customer_name=pulled_by_customer_name)
         pulled_by_name.order_quantity = int(input(f'Enter new order quantity:'))
         pulled_by_name.save()
         print(pulled_by_name)
@@ -254,7 +255,7 @@ def order_delete_function():
 def employee_portal():
     print('Welcome to the Employee Portal!')
     print('Would you like to delete an existing order or customer, create a new order, view an existing order, update an existing order, or order more stock?')
-    select_question = input (f'Select 1 to delete an existing order or customer,\n Select 2 to create a new order,\n Select 3 to view an existing order,\n Select 4 to update an existing order,\n Select 5 to order more stock.')
+    select_question = input (f'Select 1 to delete an existing order or customer,\n Select 2 to create a new order,\n Select 3 to view an existing order,\n Select 4 to update an existing order,\n Select 5 to order more stock.\t')
     if select_question.isnumeric():
         select_question = int(select_question)
     else:
@@ -302,7 +303,7 @@ def customer_portal():
 #This is the greeting/select function to choose which portal
 
 def greeting_function():
-    main_question = input (f'Are you an employee or customer? \n\tSelect 1 for Customer \n\tSelect 2 for Employee.')
+    main_question = input (f'Are you an employee or customer? \n\tSelect 1 for Customer \n\tSelect 2 for Employee. \t')
 
     if main_question == "1":
        print('Opening Customer Portal...')
