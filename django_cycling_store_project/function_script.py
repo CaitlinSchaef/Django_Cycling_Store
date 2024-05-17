@@ -148,17 +148,93 @@ def order_view_function():
 #     //
 #     print()
 
-# def order_delete_function():
-#     //
-#     print()
+def order_delete_function():
+    all_customers = Customer.objects.all()
+    all_orders = CustomerOrder.objects.all()
+    print('Hello employee! Would you like to delete a Customer or delete an Order?')
+    deletion_selection = input(f'Select 1 to delete Customer, Select 2 to delete Order. ')
+    if deletion_selection.isnumeric():
+        deletion_selection = int(deletion_selection)
+    else:
+        print('That is not an option.')
+    
+    if deletion_selection == 1:
+        print('You have selected "Delete Customer"...')
+        print(all_customers)
+        deletion_customer_options = input(f'Look up customer by ID or by Name. Select 1 for ID, Select 2 for Name: ')
+        if deletion_customer_options.isnumeric():
+            deletion_customer_options = int(deletion_customer_options)
+        else:
+            print('That is not an option.')
+            order_delete_function()
+        
+        if deletion_customer_options == 1:
+            customer_deletion_by_id = input(f'Enter customer ID: ')
+            delete_by_id = Customer.objects.get(id=customer_deletion_by_id)
+            delete_by_id.delete()
+            print('Customer deleted.')
+            print(all_customers)
+        elif deletion_customer_options == 2:
+            customer_deletion_by_name = input(f'Enter customer name as it appears in records: ')
+            delete_by_name = Customer.objects.get(name=customer_deletion_by_name)
+            delete_by_name.delete()
+            print('Customer deleted.')
+            print(all_customers)
+        else:
+            print('That is not an option.')
+            order_delete_function()
+    elif deletion_selection == 2:
+        print('You have selected "Delete Order"...')
+        print(all_orders)
+        deletion_order_options = input(f'Look up order by Order ID or by Customer Name. Select 1 for Order ID, Select 2 for Customer Name: ')
+        if deletion_order_options.isnumeric():
+            deletion_order_options = int(deletion_order_options)
+        else:
+            print('That is not an option.')
+            order_delete_function()
+
+        if deletion_order_options == 1:
+            order_deletion_by_id  = input(f'Enter order ID:')
+            if order_deletion_by_id.isnumeric():
+                order_deletion_by_id = int(order_deletion_by_id)
+                delete_order_by_id = CustomerOrder.objects.get(id=order_deletion_by_id)
+                delete_order_by_id.delete()
+                print('Order deleted.')
+                print(all_orders)
+            else:
+                print('That is not an ID.')
+                order_delete_function()
+        elif deletion_order_options == 2:
+            order_deletion_by_name = input(f'Enter customer name as it appears with order:')
+            delete_order_by_name = CustomerOrder.objects.get(customer_name=order_deletion_by_name)
+            delete_order_by_name.delete()
+            print('Order deleted.')
+            print(all_orders)
+        else:
+            print('That is not an option.')  
+    else:
+        print('That is not an option')
 
 #############################################################################################################################################################################
 #This is the employee portal
 def employee_portal():
     print('Welcome to the Employee Portal!')
-    print('Would you like to delete an existing order, create a new order, view an existing order, update an existing order, or order more stock?')
-    # select_question = input (f'Select 1 to delete an existing order, Select 2 to create a new order, Select 3 to view an existing order, Select 4 to update an existing order, Select 5 to order more stock.')
-
+    print('Would you like to delete an existing order or customer, create a new order, view an existing order, update an existing order, or order more stock?')
+    select_question = input (f'Select 1 to delete an existing order, Select 2 to create a new order, Select 3 to view an existing order, Select 4 to update an existing order, Select 5 to order more stock.')
+    if select_question.isnumeric():
+        select_question = int(select_question)
+    else:
+        print('That is not an option')
+        employee_portal()
+    
+    if select_question == 1:
+        print('Opening delete functionality...')
+        order_delete_function()
+    elif select_question == 2:
+        print('Creating a new order... ')
+        order_create_function()
+    else:
+        print('That is not an option.')
 #############################################################################################################################################################################
 #This is the customer portal
    

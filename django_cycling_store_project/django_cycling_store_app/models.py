@@ -18,7 +18,7 @@ class Customer(models.Model):
     name = models.CharField(max_length=75, null=True)
 
     def __str__(self):
-        return f'Customer Name: {self.name}'
+        return f'Customer Name: {self.name}, Customer ID: {self.id}'
 
 class CustomerOrder(models.Model):
     date_month = models.PositiveIntegerField(default=4)
