@@ -33,6 +33,7 @@ def create_customer_function():
     
 #Order to create an order:
 def order_create_function():
+    all_customers = Customer.objects.all()
     ###### Calling create customer function(), because the customer has to exist to add to order :(
     print('Are you a new customer?')
     customer_question = input(f'Yes/No\t')
@@ -40,6 +41,7 @@ def order_create_function():
     if customer_question == "Yes":
         name = create_customer_function()
     else:
+        print(all_customers)
         customer_order_name = input(f'Enter name:\t')
         name = Customer.objects.filter(name=customer_order_name).first()
         if bool(~name):
@@ -65,7 +67,7 @@ def order_create_function():
     
      # we need to identify what vehicle record we are working with
     vehicle = Vehicle.objects.filter(type=vehicle_type).first()
-    ###################################################################################################################
+    ########################################################################
     #######Selecting number of vehicles
     print('How many {vehicle_type}s would you like?')
     quantity_question = input(f'Enter quantity to purchase:\t')
@@ -79,7 +81,7 @@ def order_create_function():
     else:
         print('Sorry, this vehicle is out of stock!')
     
-    ###################################################################################################################
+    ####################################################################################
     ###########Input date:
     print('What is the order date?')
     month_input = int(input(f'Month: #\t'))
@@ -101,7 +103,7 @@ def order_create_function():
     else:
         year = year_input
     
-    ###################################################################################################################
+    #####################################################################################################
     ############ Checking for payment:
 
     print('How much would you like to pay today?')
@@ -127,7 +129,8 @@ def order_create_function():
     vehicle.save()
     print(new_order)
 
-
+#############################################################################################################################################################################
+# View an order function:
 
 def order_view_function():
     print('Look up order by name:')
@@ -144,9 +147,40 @@ def order_view_function():
     for order in customer.customerorder_set.all():
         print(f'ID: {order.id}, {order}')
 
-# def order_update_function():
-#     //
-#     print()
+#############################################################################################################################################################################
+#Order update function
+def order_update_function():
+    all_customers = Customer.objects.all()
+    all_orders = CustomerOrder.objects.all()
+    print('Pulling orders to update...')
+    print('Would you like to look up order by Order Id or Customer Name associated with the order?')
+    update_selection = input(f'Select 1 to look up by Order Id, \n Select 2 to look up by Customer Name: \t')
+    if update_selection.isnumeric():
+        update_selection = int(update_selection)
+    else:
+        print('That is not an option.')
+        order_update_function()
+    
+    if update_selection == 1:
+        print(all_orders)
+        order_update_by_id = input(f'Enter Order ID: \t')
+        pulled_by_id = CustomerOrder.objects.get(id=order_update_by_id)
+        pulled_by_id.order_quantity = int(input(f'Enter new order quantity:'))
+        pulled_by_id.save()
+        print(pulled_by_id)
+    elif update_selection == 2:
+        print(all_orders)
+        order_update_by_name = input(f'Enter Customer Name associated with order: \t')
+        pulled_by_name = CustomerOrder.objects.get(customer_name=order_update_by_name)
+        pulled_by_name.order_quantity = int(input(f'Enter new order quantity:'))
+        pulled_by_name.save()
+        print(pulled_by_name)
+    else:
+        print('That is not an option.')
+
+
+#############################################################################################################################################################################
+#Order delete function:
 
 def order_delete_function():
     all_customers = Customer.objects.all()
@@ -234,7 +268,11 @@ def employee_portal():
         print('Creating a new order... ')
         order_create_function()
     elif select_question == 3:
+        print('Pulling all orders...')
         order_view_function()
+    elif select_question == 4:
+        print('Pulling orders to update...')
+        order_update_function()
     else:
         print('That is not an option.')
 #############################################################################################################################################################################
@@ -243,7 +281,7 @@ def employee_portal():
 def customer_portal():
     print('Welcome to the Customer Portal!')
     print('Would you like to create a new order, view an existing order, or update an existing order?')
-    select_question = input (f'Select 1 to create a new order, \nSelect 2 to view an existing order,\nSelect 3 to update an existing order.\n')
+    select_question = input (f'Select 1 to create a new order, \nSelect 2 to view an existing order.\n')
     if select_question.isnumeric():
         select_question = int(select_question)
     else:
@@ -256,9 +294,6 @@ def customer_portal():
     elif select_question == 2:
         print('Pulling existing orders...')
         order_view_function()
-    elif select_question == 3:
-        print('Pulling existing orders to update...')
-        #order_update_function()
     else:
         print('That is not an option')
         customer_portal()

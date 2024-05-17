@@ -12,7 +12,7 @@ class Vehicle(models.Model):
     color = models.TextField(max_length=50, default='black', null=True)
 
     def __str__(self):
-        return f'Type: {self.type}, Price: ${self.number_in_stock}, Color: {self.color}, Number In Stock: {self.number_in_stock}'
+        return f'Type: {self.type}, Price: ${self.number_in_stock}, Color: {self.color}'
 
 class Customer(models.Model):
     name = models.CharField(max_length=75, null=True)
